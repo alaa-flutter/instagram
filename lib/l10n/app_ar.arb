@@ -1,0 +1,27 @@
+{
+"home" : "الرئيسية",
+"search" : "بحث",
+"add" : "اضافة",
+"favourite" : "المفضلة",
+"profile" : "شخصي",
+"posts" : "المنشورات",
+"followers" : "متابعون",
+"following" : "اتابعهم",
+"editProfile" : "تعدبل",
+"logOut" : "خروج",
+"register" : "انشاء حساب",
+"enterYourUsername" : "ادخل اسمك :",
+"enterYourTitle" : "ادخل عنوانك :",
+"enterYourEmail" : "ادخل بريدك الالكتروني :",
+"enterYourPassword" : "ادخل كلمة المرور :",
+"noAccount" : "لا نمتلك حساب ؟",
+"haveAccount" : "لديك حساب ؟",
+"signIn" : "نسجيل دخول",
+"forgotPassword" : "نسيت كلمة المرور؟",
+"resetPassword" : "اعادة تعيين كلمة المرور",
+"enterYourEmailToRestYourPassword" : "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور الخاصة بك.",
+"doneCheckYourEmail" : "جاهز . افحص ايميلك",
+"haveSuccessfullyLoggedIn" : "تم تسجيل الدخول بنجاح",
+"createAccountHasSuccessfully" : "تم انشاء الحساب بنجاح"
+
+}
