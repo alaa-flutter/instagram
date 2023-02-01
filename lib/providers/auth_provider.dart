@@ -4,7 +4,6 @@ import '../shared_prefernces/shared_preferences.dart';
 
 class AuthProvider  extends ChangeNotifier{
   String name_ = SharedPreferencesController().getter(type: String, key: SpKeys.username);
-  String mobile_ = SharedPreferencesController().getter(type: String, key: SpKeys.mobile);
   String avatar_ = SharedPreferencesController().getter(type: String, key: SpKeys.avatar);
 
 
