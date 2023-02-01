@@ -14,11 +14,6 @@ class AuthProvider  extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> setMobile_(String mobile)async{
-    mobile_ = mobile;
-    await SharedPreferencesController().setter(type: String, key: SpKeys.mobile, value: mobile);
-    notifyListeners();
-  }
 
   Future<void> setAvatar_ (String avatar)async{
     avatar_ = avatar;
