@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 import '../providers/lang_provider.dart';
 import '../shared/color.dart';
+import '../shared/enums.dart';
+import '../shared_prefernces/shared_preferences.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -59,18 +62,23 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(2),
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Colors.grey),
-                    child: CircleAvatar(
-                      radius: 20.w,
-                      backgroundImage: const NetworkImage(
-                        'https://imgs.search.brave.com/Yob7hRfgDKPDc04OyWfuk-7Sn6LRqn3eCflVvvHn9AY/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5S/RGMycHRrMXNFUi1j/YS04MEpIdTlnSGFF/SyZwaWQ9QXBp',
-                      ),
-                    ),
+                    child: Provider.of<AuthProvider>(context, listen: false)
+                        .avatar_
+                        .isNotEmpty
+                        ? CircleAvatar(
+                        radius: 20.w,
+                        backgroundImage: NetworkImage(
+                            Provider.of<AuthProvider>(context).avatar_))
+                        : CircleAvatar(
+                        radius: 20.w,
+                        backgroundImage:
+                        const AssetImage('assets/images/avatar.png')),
                   ),
                   SizedBox(
                     width: 10.w,
                   ),
                   Text(
-                    'Alaa Rashed',
+                    ' ${SharedPreferencesController().getter(type: String, key: SpKeys.username)}',
                     style: TextStyle(
                       color: primaryColor,
                       fontSize: 17.sp,

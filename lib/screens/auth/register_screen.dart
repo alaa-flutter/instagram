@@ -195,7 +195,8 @@ class _RegisterState extends State<Register> with SnackBarHelper {
   String? imgName;
   String? urlImg;
   uploadImage2Screen(ImageSource source) async {
-    final pickedImg = await ImagePicker().pickImage(source: source);
+    Navigator.of(context).pop();
+    final XFile? pickedImg = await ImagePicker().pickImage(source: source);
     try {
       if (pickedImg != null) {
         setState(() {
@@ -206,14 +207,17 @@ class _RegisterState extends State<Register> with SnackBarHelper {
           print(imgName);
         });
       } else {
+        showSnackBar(context,
+            message: "NO img selected", error: true);
         print("NO img selected");
       }
     } catch (e) {
+      showSnackBar(context,
+          message: e.toString(), error: true);
       print("Error => $e");
     }
 
-    if (!mounted) return;
-    Navigator.pop(context);
+
   }
   uploadImage() {
     return showModalBottomSheet(
@@ -304,7 +308,7 @@ class _RegisterState extends State<Register> with SnackBarHelper {
       );
 
       if (imgPath != null) {
-        final storageRef = FirebaseStorage.instance.ref(imgName);
+        final storageRef = FirebaseStorage.instance.ref("avatar/$imgName");
         await storageRef.putFile(imgPath!);
         urlImg = await storageRef.getDownloadURL();
       }
@@ -350,10 +354,10 @@ class _RegisterState extends State<Register> with SnackBarHelper {
     UserModel userModel = UserModel();
     userModel.uId = userCredential.user!.uid;
     userModel.username = usernameEditingController.text;
+    userModel.title = titleEditingController.text;
     userModel.email = emailEditingController.text;
     userModel.password = passwordEditingController.text;
     userModel.avatar = urlImg ?? '';
-
     userModel.fcmToken = '';
     return userModel;
   }

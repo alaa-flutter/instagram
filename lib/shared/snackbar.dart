@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 mixin SnackBarHelper {
   void showSnackBar(
       BuildContext context, {
         required String message,
         required bool error,
-        int duration = 2,
+        int duration = 4,
       }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -13,7 +14,7 @@ mixin SnackBarHelper {
           message,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 15,
+            fontSize: 15.sp,
           ),
           textAlign: TextAlign.center,
         ),
@@ -21,10 +22,10 @@ mixin SnackBarHelper {
         error ? const Color(0xffff4d4f) : const Color(0xff52c41a),
         behavior: SnackBarBehavior.floating,
         duration: Duration(seconds: duration),
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.r)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.r)),
         padding: EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 8,
+          horizontal: 10.w,
+          vertical: 8.h,
         ),
         margin: EdgeInsets.zero,
         elevation: 10,

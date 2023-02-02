@@ -8,6 +8,9 @@ import 'package:insta/shared/snackbar.dart';
 import 'package:provider/provider.dart';
 import '../../firebase/controllers/user_fb_controller.dart';
 import '../../providers/auth_provider.dart';
+import '../../responsive/mobile.dart';
+import '../../responsive/responsive_design.dart';
+import '../../responsive/web.dart';
 import '../../shared/color.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../shared/elevated_button.dart';
@@ -143,7 +146,7 @@ class _LoginState extends State<Login> with SnackBarHelper {
           error: false);
 
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomePage()));
+          MaterialPageRoute(builder: (context) => const ResponsiveDesign(myWebScreen: WebScreen(), myMobileScreen: MobileScreen(),)));
     } on FirebaseAuthException catch (e) {
       setState(() {
         isLoading = false;
@@ -178,13 +181,15 @@ class _LoginState extends State<Login> with SnackBarHelper {
             .setName_(doc.get('username'));
         Provider.of<AuthProvider>(context, listen: false)
             .setAvatar_(doc.get('avatar'));
-        // var fcmToken = await FirebaseMessaging.instance.getToken();
-        // await SharedPreferencesController()
-        //     .setter(type: String, key: SpKeys.fcmToken, value: fcmToken ?? '');
-        // await UserFbController().updateFCMToken(
-        //   uId,
-        //   fcmToken ?? '',
-        // );
+        Provider.of<AuthProvider>(context, listen: false)
+            .setTitle_(doc.get('title'));
+        var fcmToken = await FirebaseMessaging.instance.getToken();
+        await SharedPreferencesController()
+            .setter(type: String, key: SpKeys.fcmToken, value: fcmToken ?? '');
+        await UserFbController().updateFCMToken(
+          uId,
+          fcmToken ?? '',
+        );
       }
     });
   }

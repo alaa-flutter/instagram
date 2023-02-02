@@ -3,9 +3,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/auth_provider.dart';
 import '../shared/color.dart';
 import '../shared/elevated_button_icon.dart';
+import '../shared/enums.dart';
 import '../shared_prefernces/shared_preferences.dart';
 import 'auth/login_screen.dart';
 
@@ -23,7 +26,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       backgroundColor: mobileBackgroundColor,
       appBar: AppBar(
-        title: const Text('Alaa kakawi'),
+        title:  Text(' ${SharedPreferencesController().getter(type: String, key: SpKeys.username)}'),
         backgroundColor: mobileBackgroundColor,
       ),
       body: Column(
@@ -36,12 +39,17 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.all(2),
                 decoration: const BoxDecoration(
                     shape: BoxShape.circle, color: Colors.grey),
-                child: CircleAvatar(
-                  radius: 36.w,
-                  backgroundImage: const NetworkImage(
-                    'https://imgs.search.brave.com/Yob7hRfgDKPDc04OyWfuk-7Sn6LRqn3eCflVvvHn9AY/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5S/RGMycHRrMXNFUi1j/YS04MEpIdTlnSGFF/SyZwaWQ9QXBp',
-                  ),
-                ),
+                child:Provider.of<AuthProvider>(context, listen: false)
+                    .avatar_
+                    .isNotEmpty
+                    ? CircleAvatar(
+                    radius: 40.w,
+                    backgroundImage: NetworkImage(
+                        Provider.of<AuthProvider>(context).avatar_))
+                    : CircleAvatar(
+                    radius: 40.w,
+                    backgroundImage:
+                    const AssetImage('assets/images/avatar.png')),
               ),
               Expanded(
                 child: Row(
@@ -128,7 +136,7 @@ class _ProfileState extends State<Profile> {
             width: double.infinity,
               margin: EdgeInsetsDirectional.only(start: 16.w),
               child: Text(
-                  'Flutter',
+                '${SharedPreferencesController().getter(type: String, key: SpKeys.title)}',
               ),
           ),
           SizedBox(
